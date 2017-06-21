@@ -1,7 +1,6 @@
 package de.enricoweinhold.testrecyclerview;
 
 import android.content.Context;
-import android.support.v7.widget.MenuPopupWindow;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements It
 
     private List<String> mDataset = new ArrayList<>();
     private Context mContext;
-    private View mView;
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
@@ -40,16 +38,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements It
     public void makeToastAfterMoved(int start, int end) {
         if (start != -1 && end != -1) {
             Toast.makeText(mContext, start + " " + end, Toast.LENGTH_LONG).show();
-        } else {
-            createContextMenu();
         }
-    }
-
-    private void createContextMenu() {
-        PopupMenu popup = new PopupMenu(mContext, mView);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_list, popup.getMenu());
-        popup.show();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +63,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements It
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.my_text_view, parent, false);
-        mView = v;
         return new ViewHolder(v);
     }
 
